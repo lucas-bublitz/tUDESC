@@ -494,7 +494,6 @@
   foreign-abstract-page(foreign-abstract, foreign-keywords)
   outline(title: [Lista de Figuras], target: figure.where(kind: image))
   outline(title: [Lista de Tabelas], target: figure.where(kind: table))
-  outline(title: [LISTA DE ABREVIATURAS E SIGLAS], target: figure.where(kind: table))
 
   if acronyms-terms != none { acronyms-page(acronyms-terms)}
   outline(title: [Sumário])
