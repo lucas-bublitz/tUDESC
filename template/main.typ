@@ -12,6 +12,7 @@
 // No webapp, o typst reconhece automaticamente os arquivos de fontes presentes no projeto, localmente, entretanto, a fonte deve ser instalada no sistema para que seja possível sua utilização (no Windows, constumam vir por padrão).
 
 #import "imports.typ": *
+#import "./terms.typ": term-list
 
 #show: codly-init.with()
 #codly(languages: codly-languages)
@@ -20,8 +21,8 @@
 // Definição da ordem de preferência das fontes (ignora as fontes não instaladas, porém gera um warning do compilador)
 #set text(font: ("Arial", "Times New Roman", "STIX Two Text"))
 
-#import "@preview/bellbird-udesc-paper:0.0.1": bellbird-udesc-paper
-// #import "../src/lib.typ": bellbird-udesc-paper
+// #import "@preview/bellbird-udesc-paper:0.0.1": bellbird-udesc-paper
+#import "../src/lib.typ": bellbird-udesc-paper
 
 #show: bellbird-udesc-paper.with(
   // ARGUMENTOS OBRIGATÓRIOS 
@@ -69,12 +70,14 @@
   dedication: [Aos alunos da Universidade do Estado de Santa Catarina, altissíssimo.], 
   acknowledgments : [Eu quero me agradecer por acreditar em mim mesmo, quero me agradecer por todo esse trabalho duro. Quero me agradecer por não tirar folgas. Quero me agradecer por nunca desistir. Quero me agradecer por ser generoso e sempre dar mais do que recebo. Quero me agradecer por tentar sempre fazer mais o certo do que o errado. Quero me agradecer por ser eu mesmo o tempo inteiro.],
   epigraph : [_Somos por essa causa, essa somente,\ perdidos, mas nossa pena é só esta:\ sem esperança, ansiar eternamente._\ \ (A Divina Comédia, Canto IV, 40-42, Dante Alighieri)],
+  acronyms-terms: term-list,
   index-card: true
 )
 
 
 #include "chapters/1-introduction.typ"
 #include "chapters/2-figures.typ"
+#include "chapters/4-acronyms.typ"
 
 
 // BIBLIOGRAFIA

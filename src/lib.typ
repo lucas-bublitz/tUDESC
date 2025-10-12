@@ -1,8 +1,12 @@
 // Modelo para Trabalhos Acadêmicos da UDESC
 // Não é um projeto oficial!
 // Criado por Lucas Vinícius Bublitz.
+// E contribuições da comunidade.
 // Licença livre nos termos do GNU!
 // Construído com base no Manual para Elaboração de Trabalhados Acadêmicos da Udesc, acessível em https://www.udesc.br/bu/manuais.
+
+// Utilizado para gerar glossários
+#import "@preview/glossarium:0.5.9": make-glossary, print-glossary, gls, glspl, register-glossary
 
 #let bellbird-udesc-paper(
 
@@ -32,6 +36,7 @@
   epigraph: none,
   abstract: none,
   dedication: none,
+  acronyms-terms: none,
   index-card: false,
 
   // DOCUMENTO
@@ -337,7 +342,7 @@
 
   // DEDICATÓRIA
 
-  let dedication-page(dedication) = epigraph-page(dedication) // A dedocatória tem o mesmo estilo da folha de agradecimento.
+  let dedication-page(dedication) = epigraph-page(dedication) // A dedicatória tem o mesmo estilo da folha de agradecimento.
 
   // AGRADECIMENTO
 
@@ -369,7 +374,34 @@
       multiLinebreak(2)
       [*Keywords*: ];keywords.join("; ");[.]
   })
- 
+
+  // LISTA DE ABREVIATURAS E SIGLAS
+  show: make-glossary
+  if acronyms-terms != none {
+    register-glossary(acronyms-terms)
+  }
+
+  let default-print-title(entry) = {
+    return grid(
+      columns: (75pt, auto),
+      entry.short,
+      entry.long
+    )
+  }
+
+  let acronyms-page(terms) = page(numbering: none, {
+      set par(leading: 1em, first-line-indent: 0em)
+      align(center, [*LISTA DE ABREVIATURAS E SIGLAS*])
+      multiLinebreak(1)
+      print-glossary(terms,
+        user-print-title: default-print-title,
+        disable-back-references: true
+      )
+      multiLinebreak(2)
+    
+  })
+
+
   // SUMÁRIOS E LISTAS
   
   set outline(indent: 0em)
@@ -462,6 +494,9 @@
   foreign-abstract-page(foreign-abstract, foreign-keywords)
   outline(title: [Lista de Figuras], target: figure.where(kind: image))
   outline(title: [Lista de Tabelas], target: figure.where(kind: table))
+  outline(title: [LISTA DE ABREVIATURAS E SIGLAS], target: figure.where(kind: table))
+
+  if acronyms-terms != none { acronyms-page(acronyms-terms)}
   outline(title: [Sumário])
   
   // PARTE TEXTUAL
