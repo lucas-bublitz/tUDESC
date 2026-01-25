@@ -50,7 +50,7 @@ These arguments are optional. If omitted, the related section is not shown:
 | `acknowledgments` | Acknowledgments section. | content |
 | `epigraph`        | Epigraph, including optional source/citation. | content |
 | `index-card`      | Catalog Sheet (default `false`). | boolean |
-
+| `acronyms-terms`  | An array of dictionaries defining acronyms. Enables the acronyms feature. | array |
 
 ## Pre-textual Elements 
 
@@ -79,6 +79,7 @@ The following sections are only rendered **if their arguments are provided** or 
 | **Dedication** (`Dedicatória`) | `dedication` | Rendered as a quiet page, bottom-left aligned. |
 | **Acknowledgments** (`Agradecimentos`) | `acknowledgments` | Includes centered heading and standard paragraph. |
 | **Epigraph** (`Epígrafe`) | `epigraph` | Displayed at the bottom-left, similar to dedication. |
+| **List of Acronyms** (`Lista de Siglas`) | `acronyms-terms` | Auto-generated when the `acronyms-terms` argument is provided. |
 
 ## Style Automations
 
@@ -104,6 +105,9 @@ The `paper-udesc` Typst template automates some visual and structural formatting
 the template will initialize you with a sample call to the `paper-udesc` function in a show rule, along with some examples and a starter structure file to organize the text (not yet).
 
 ```typ
+// To use the acronyms feature, first import your list of terms
+// #import "terms.typ": term-list
+
 #show: paper-udesc.with(
   // ARGUMENTOS OBRIGATÓRIOS 
   campus: [Centro de Ciências Tecnológicas -- CCT],
@@ -150,6 +154,7 @@ the template will initialize you with a sample call to the `paper-udesc` functio
   dedication: [Aos alunos da Universidade do Estado de Santa Catarina, altissíssimo.], 
   acknowledgments : [Eu quero me agradecer por acreditar em mim mesmo, quero me agradecer por todo esse trabalho duro. Quero me agradecer por não tirar folgas. Quero me agradecer por nunca desistir. Quero me agradecer por ser generoso e sempre dar mais do que recebo. Quero me agradecer por tentar sempre fazer mais o certo do que o errado. Quero me agradecer por ser eu mesmo o tempo inteiro.],
   epigraph : [_Somos por essa causa, essa somente,\ perdidos, mas nossa pena é só esta:\ sem esperança, ansiar eternamente._\ \ (A Divina Comédia, Canto IV, 40-42, Dante Alighieri)],
+  acronyms-terms: term-list, // Adicione a lista de termos aqui
   index-card: true
 )
 
